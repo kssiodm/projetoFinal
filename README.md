@@ -1,13 +1,16 @@
 # Catálogo de filmes e series
 
 ### **Tema da pesquisa**
-A ideia principal do projeto é fornecer ao usuário um catálogo de filmes e series e onde e como assistir. Principalmente para as pessoas que utilizam streamings, para que possam achar o conteúdo que elas querem assistir em seu streaming. Além de sugerir filmes e series baseado no interesse do usuário.
+    A ideia principal do projeto é fornecer ao usuário um catálogo de filmes e series e onde e como assistir. Principalmente para as pessoas que utilizam streamings, para que possam achar o conteúdo que elas querem assistir em seu
+streaming. Além de sugerir filmes e series baseado no interesse do usuário.
 
 ### **Problema de pesquisa**
-Este projeto surge da necessidade de resolver desafios na experiência dos usuários de plataformas de streaming. Problemas como desorganização do catálogo, dificuldades na busca por títulos específicos, subutilização do conteúdo disponível e a falta de recomendações personalizadas prejudicam a satisfação dos usuários. A interface também é um ponto crítico. O projeto visa desenvolver uma solução abrangente para otimizar a busca, organização e descoberta de filmes e séries, melhorando assim a experiência global do usuário em plataformas de streaming.
+    Este projeto surge da necessidade de resolver desafios na experiência dos usuários de plataformas de streaming. Problemas como desorganização do catálogo, dificuldades na busca por títulos específicos, subutilização do conteúdo
+disponível e a falta de recomendações personalizadas prejudicam a satisfação dos usuários. A interface também é um ponto crítico. O projeto visa desenvolver uma solução abrangente para otimizar a busca, organização e descoberta de filmes e séries, melhorando assim a experiência global do usuário em plataformas de streaming.
 
 ### **Objetivo geral**
-O objetivo deste projeto é desenvolver um site de catálogo de filmes e séries, com foco na implementação de funcionalidades de pesquisa, filtragem e recomendação. O projeto buscará integrar conceitos de desenvolvimento web, armazenamento de dados, interação com o usuário e, se aplicável, e técnicas para a recomendação de conteúdo. O site será desenvolvido utilizando as melhores práticas de programação, visando a criação de uma interface amigável e responsiva para os usuários.
+    O objetivo deste projeto é desenvolver um site de catálogo de filmes e séries, com foco na implementação de funcionalidades de pesquisa, filtragem e recomendação. O projeto buscará integrar conceitos de desenvolvimento web 
+armazenamento de dados, interação com o usuário e, se aplicável, e técnicas para a recomendação de conteúdo. O site será desenvolvido utilizando as melhores práticas de programação, visando a criação de uma interface amigável e responsiva para os usuários.
 
 ### **Objetivos específicos**
 Investigar e implementar métodos eficazes de pesquisa e filtragem de filmes e séries com base em diferentes critérios, como gênero, ano, diretor, atores, entre outros.
