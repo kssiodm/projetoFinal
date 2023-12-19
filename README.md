@@ -17,17 +17,26 @@ Investigar e implementar métodos para melhorar a interatividade e a experiênci
 
 
 ### Justificativa
-Demanda Crescente: A crescente oferta de filmes e séries nos dias atuais resulta em uma grande diversidade de opções para os espectadores, tornando desafiador encontrar conteúdos que atendam às preferências individuais.
+**Demanda Crescente**: A crescente oferta de filmes e séries nos dias atuais resulta em uma grande diversidade de opções para os espectadores, tornando desafiador encontrar conteúdos que atendam às preferências individuais.
 Necessidade de Organização: A falta de uma ferramenta eficiente para catalogar e pesquisar filmes e séries dificulta a localização de títulos específicos, levando a uma experiência frustrante para os usuários.
-Desordem na Busca: A ausência de um sistema organizado torna a pesquisa por filmes e séries uma tarefa demorada e muitas vezes infrutífera.
-Desconhecimento de Conteúdo: Os usuários podem não estar cientes da diversidade de opções disponíveis, resultando em uma subutilização do vasto catálogo de entretenimento.
-Expansão do Catálogo: O constante crescimento do número de filmes e séries torna difícil manter um controle manual e eficiente da organização.
-Falta de Personalização: A ausência de recursos de recomendação personalizada contribui para a incapacidade de os usuários descobrirem novos conteúdos com base em suas preferências.
-Amantes de Filmes e Séries: Este projeto visa atender a qualquer pessoa interessada em explorar e descobrir novos conteúdos audiovisuais.
-Usuários de Plataformas de Streaming: Aqueles que utilizam serviços de streaming se beneficiarão diretamente ao encontrar e organizar facilmente os títulos disponíveis.
-Facilidade na Busca: Os usuários poderão encontrar rapidamente filmes e séries de acordo com seus gostos e preferências.
-Recomendações Personalizadas: O sistema proporcionará sugestões baseadas no histórico de visualização, aumentando a descoberta de novos conteúdos.
-Organização Eficiente: A catalogação adequada facilitará a navegação, tornando a experiência do usuário mais agradável e eficaz.
+
+**Desordem na Busca**: A ausência de um sistema organizado torna a pesquisa por filmes e séries uma tarefa demorada e muitas vezes infrutífera.
+
+**Desconhecimento de Conteúdo**: Os usuários podem não estar cientes da diversidade de opções disponíveis, resultando em uma subutilização do vasto catálogo de entretenimento.
+
+**Expansão do Catálogo**: O constante crescimento do número de filmes e séries torna difícil manter um controle manual e eficiente da organização.
+
+**Falta de Personalização**: A ausência de recursos de recomendação personalizada contribui para a incapacidade de os usuários descobrirem novos conteúdos com base em suas preferências.
+
+**Amantes de Filmes e Séries**: Este projeto visa atender a qualquer pessoa interessada em explorar e descobrir novos conteúdos audiovisuais.
+
+**Usuários de Plataformas de Streaming**: Aqueles que utilizam serviços de streaming se beneficiarão diretamente ao encontrar e organizar facilmente os títulos disponíveis.
+
+**Facilidade na Busca**: Os usuários poderão encontrar rapidamente filmes e séries de acordo com seus gostos e preferências.
+
+**Recomendações Personalizadas**: O sistema proporcionará sugestões baseadas no histórico de visualização, aumentando a descoberta de novos conteúdos.
+
+**Organização Eficiente**: A catalogação adequada facilitará a navegação, tornando a experiência do usuário mais agradável e eficaz.
 
 ### Referencial teórico
 Desenvolvimento Web com Python:
