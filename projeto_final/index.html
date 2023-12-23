@@ -4,19 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TMDb API Example</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="main.css">
     </head>
     <body>
-        <div class="container">
-            <h1>TMDb Movie Search</h1>
-            <form id="searchForm">
-            <label for="movieTitle">Enter Movie Title:</label>
-            <input type="text" id="movieTitle" required>
-            <button type="submit">Search</button>
-            </form>
+        <header class="navbar navbar-expand-lg sticky-top p-4" id="cabecalho">
+            <div class="container">
+                <h1 class="navbar-brand m-0 section-title">Filmes</h1>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu-naevgacao">
+                    <span class="navbar navbar-toggler-icon"></span>
+                </button>
+                <nav class="navbar-collapse collapse justify-content-end" id="menu-naevgacao">
+                    <ul class="nav nav-pills d-block d-md-flex">
+                        <li class="nav-item fw-bold">
+                            <h4>
+                                <a href="#" class="nav-link ">
+                                    Home
+                                </a>
+                            </h4>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <h4>
+                                <a href="#lancamentos" class="nav-link">
+                                    lançamentos
+                                </a>
+                            </h4>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <h4>
+                                <a href="#popular" class="nav-link">
+                                    Popular
+                                </a>
+                            </h4>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <h4>
+                                <a href="#listas" class="nav-link">
+                                    listas
+                                </a>
+                            </h4>
+                        </li>
+                        <li>
+                            <form id="searchForm">
+                                <input type="text" id="movieTitle" required>
+                                <button type="submit">Search</button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
             <div id="results"></div>
         </div>
-
+        <script src="lib/bootstrap.bundle.min.js"></script>
         <script src="main.js"></script>
     </body>
 </html>
