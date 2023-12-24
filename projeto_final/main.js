@@ -59,8 +59,8 @@ function displayResults(results) {
         : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
 
     resultElement.innerHTML = `
-        <h2>${title}</h2>
         <img src="${imageUrl}" alt="${title} Poster">
+        <h2>${title}</h2>
         <p>${item.overview}</p>
         <p>Data de Lançamento: ${releaseDate}</p>
         <p>Avaliação Média: ${item.vote_average}</p>

@@ -13,10 +13,10 @@ body {
 h1 {
     color: #333;
 }
-
-/* .navbar{
-    background-color: #e15f41;
-} */
+.container_flex{
+    display: flex;
+    align-items: self-start;
+}
 
 #cabecalho .nav .nav-link.active{
     background-color: #fff;
@@ -50,6 +50,11 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
+}
+
+#butao{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 button:hover {
