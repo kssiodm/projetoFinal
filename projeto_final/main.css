@@ -65,3 +65,20 @@ button:hover {
     align-items: center;
     margin-top: 20px;
 }
+
+.result {
+    margin-bottom: 25px;
+}
+
+  /* Estilo adicional para a imagem do filme/programa */
+.result img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px; /* Adicione bordas arredondadas para a imagem */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adicione sombra à imagem */
+}
+
+  /* Estilo para os detalhes do filme/programa */
+.result p {
+    margin-bottom: 8px;
+}

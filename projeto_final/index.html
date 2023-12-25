@@ -54,15 +54,47 @@
                             </form>
                         </li>
                         <li>
-                            <button class="btn btn-dark"  data-bs-target="#login">
-                                login/up
-                            </button>
+                            <div class="dropdown">
+                                <div class="btn-group">
+                                    <button class="btn btn-dark"  data-bs-target="#login">
+                                        login/up
+                                    </button>
+                                    <button data-bs-toggle="dropdown" class="btn btn-dark dropdown-toggle"></button>
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li>
+                                                    <a class="dropdown-item butao_sec" href="#contato">
+                                                        <i class="bi bi-telephone me-1"></i>
+                                                        contato
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item butao_sec" href="#contato">
+                                                        Sobre nós
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item butao_sec" href="#">
+                                                        FAQ
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </nav>
             </div>
         </header>
-            <div class="container" id="results"></div>
+            <div class="container" id="results">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        
+                    </div>
+                </div>
+            </div>
         </div>
         <script src="lib/bootstrap.bundle.min.js"></script>
         <script src="main.js"></script>
