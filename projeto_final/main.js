@@ -34,37 +34,37 @@ function displayResults(results) {
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>Nenhum resultado encontrado.</p>';
         return;
-        }
+    }
 
     // Crie elementos para cada resultado e adicione à página
     results.forEach(item => {
         const resultElement = document.createElement('div');
         resultElement.classList.add('result');
 
-        let title, releaseDate, overview, imageUrl;
+    let title, releaseDate, overview, imageUrl;
 
-        if (item.media_type === 'movie') {
-            title = item.title;
-            releaseDate = formatarData(item.release_date);
-            overview = item.overview;
-            imageUrl = item.poster_path
+    if (item.media_type === 'movie') {
+        title = item.title;
+        releaseDate = formatarData(item.release_date);
+        overview = item.overview;
+        imageUrl = item.poster_path
             ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-            : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
-            getMovieDetails(item.id, resultElement);
-        } else if (item.media_type === 'tv') {
-            title = item.name;
-            releaseDate = formatarData(item.first_air_date);
-            overview = item.overview;
-            imageUrl = item.poster_path
-            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-            : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
-            getTVShowDetails(item.id, resultElement);
-        } else {
-            // Se não for um filme ou série, pule este resultado
-            return;
-        }
+          : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
+        getMovieDetails(item.id, resultElement);
+    } else if (item.media_type === 'tv') {
+        title = item.name;
+        releaseDate = formatarData(item.first_air_date);
+        overview = item.overview;
+        imageUrl = item.poster_path
+        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+          : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
+        getTVShowDetails(item.id, resultElement);
+    } else {
+        // Se não for um filme ou série, pule este resultado
+    return;
+    }
 
-        resultElement.innerHTML = `
+    resultElement.innerHTML = `
         <div class="row">
             <div class="col-md-4">
                 <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
@@ -73,6 +73,7 @@ function displayResults(results) {
             <div class="col-md-8">
                 <h2>${title}</h2>
                 <p>${overview}</p>
+                
             </div>
         </div>
         `;
@@ -97,7 +98,7 @@ function formatarData(dataString) {
 
   // Função para obter detalhes de um filme por ID
 function getMovieDetails(movieId, resultElement) {
-    const apiKey = 'SUA_CHAVE_DE_API';
+    const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
 
@@ -110,7 +111,7 @@ function getMovieDetails(movieId, resultElement) {
             <p>Classificação: ${details.vote_average}</p>
             <p>Duração: ${details.runtime} minutos</p>
             <p>Diretor: ${details.director || 'Não disponível'}</p>
-        `;
+            `;
         })
         .catch(error => console.error('Erro ao obter detalhes do filme:', error));
 }
@@ -124,12 +125,12 @@ function getTVShowDetails(tvShowId, resultElement) {
     fetch(tvShowDetailsUrl)
         .then(response => response.json())
         .then(details => {
-        // Adicione informações adicionais ao resultado
+        // Adicione informações adicionais ao resultado<p>Duração: ${details.runtime} minutos</p>
         resultElement.innerHTML += `
             <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
             <p>Classificação: ${details.vote_average}</p>
-            <p>Duração: ${details.episode_run_time.length > 0 ? `${details.episode_run_time[0]} minutos por episódio` : 'Não disponível'}</p>
-            <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
+            <p>Duração: ${details.runtime} minutos</p>
+            <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
