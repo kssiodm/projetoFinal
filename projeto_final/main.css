@@ -82,3 +82,9 @@ button:hover {
 .result p {
     margin-bottom: 8px;
 }
+
+.vertical-line {
+    border-right: 2px solid black; /* ou qualquer outra cor desejada */
+    max-width: 415px;
+    height: 100px; /* altura da linha */
+}

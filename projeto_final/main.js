@@ -1,42 +1,34 @@
 document.getElementById('searchForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Obtenha a chave da API TMDb
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
-    // Obtenha o valor do campo de pesquisa
     const searchTerm = document.getElementById('movieTitle').value;
 
-    // Especifique o idioma desejado (português do Brasil)
     const language = 'pt-BR';
 
-    // Construa a URL da API TMDb incluindo o parâmetro de idioma
     const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchTerm}&language=${language}`;
 
-    // Faça a solicitação à API usando fetch
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-        // Exiba os resultados na página
         displayResults(data.results);
         })
         .catch(error => console.error('Erro ao fazer a solicitação à API:', error));
+
+
 });
 
-  // Função para exibir os resultados na página
 function displayResults(results) {
     const resultsContainer = document.getElementById('results');
 
-    // Limpe os resultados anteriores
     resultsContainer.innerHTML = '';
 
-    // Verifique se há resultados
     if (results.length === 0) {
         resultsContainer.innerHTML = '<p>Nenhum resultado encontrado.</p>';
         return;
     }
 
-    // Crie elementos para cada resultado e adicione à página
     results.forEach(item => {
         const resultElement = document.createElement('div');
         resultElement.classList.add('result');
@@ -48,8 +40,8 @@ function displayResults(results) {
         releaseDate = formatarData(item.release_date);
         overview = item.overview;
         imageUrl = item.poster_path
-            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-          : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
+        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+        : 'placeholder-image-url.jpg'; 
         getMovieDetails(item.id, resultElement);
     } else if (item.media_type === 'tv') {
         title = item.name;
@@ -57,10 +49,10 @@ function displayResults(results) {
         overview = item.overview;
         imageUrl = item.poster_path
         ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-          : 'placeholder-image-url.jpg'; // URL de uma imagem de espaço reservado, se não houver imagem disponível
+        : 'placeholder-image-url.jpg';
         getTVShowDetails(item.id, resultElement);
     } else {
-        // Se não for um filme ou série, pule este resultado
+        
     return;
     }
 
@@ -82,7 +74,7 @@ function displayResults(results) {
     });
 }
 
-  // Função para formatar a data no padrão dia/mês/ano
+
 function formatarData(dataString) {
     if (!dataString) {
         return 'Data indisponível';
@@ -90,13 +82,12 @@ function formatarData(dataString) {
 
     const data = new Date(dataString);
     const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); // Meses são base 0, então é necessário adicionar 1
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); 
     const ano = data.getFullYear();
 
     return `${dia}/${mes}/${ano}`;
 }
 
-  // Função para obter detalhes de um filme por ID
 function getMovieDetails(movieId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
@@ -105,7 +96,6 @@ function getMovieDetails(movieId, resultElement) {
     fetch(movieDetailsUrl)
         .then(response => response.json())
         .then(details => {
-        // Adicione informações adicionais ao resultado
         resultElement.innerHTML += `
             <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
             <p>Classificação: ${details.vote_average}</p>
@@ -116,7 +106,6 @@ function getMovieDetails(movieId, resultElement) {
         .catch(error => console.error('Erro ao obter detalhes do filme:', error));
 }
 
-  // Função para obter detalhes de uma série de TV por ID
 function getTVShowDetails(tvShowId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
@@ -125,7 +114,6 @@ function getTVShowDetails(tvShowId, resultElement) {
     fetch(tvShowDetailsUrl)
         .then(response => response.json())
         .then(details => {
-        // Adicione informações adicionais ao resultado<p>Duração: ${details.runtime} minutos</p>
         resultElement.innerHTML += `
             <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
             <p>Classificação: ${details.vote_average}</p>
