@@ -60,6 +60,28 @@ function displayResults(results) {
         <div class="row">
             <div class="col-md-4">
                 <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
+                <ul class="lista">
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-bookmark-plus"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-check-square"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-hand-thumbs-down"></i>
+                        </button>
+                    </li>
+                </ul>
                 <p>Data de Lançamento: ${releaseDate}</p>
             </div>
             <div class="col-md-8">

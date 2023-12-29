@@ -83,8 +83,45 @@ button:hover {
     margin-bottom: 8px;
 }
 
-.vertical-line {
-    border-right: 2px solid black; /* ou qualquer outra cor desejada */
-    max-width: 415px;
-    height: 100px; /* altura da linha */
+.lista{
+    display: inline-flex;
+}
+
+.item_lista{
+    background-color: transparent;
+    border: none;
+    color: #000000; /* Cor do texto do botão primário do Bootstrap */
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 5px;
+    list-style: none;
+}
+
+.item_lista:hover{
+    background-color: transparent;
+    color: #0056b3;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie {
+    cursor: pointer;
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.movie:hover img {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
 }
