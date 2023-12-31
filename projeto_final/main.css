@@ -101,3 +101,7 @@ button:hover {
     background-color: transparent;
     color: #0056b3;
 }
+
+.infos{
+    display: block;
+}

@@ -119,10 +119,12 @@ function getMovieDetails(movieId, resultElement) {
         .then(response => response.json())
         .then(details => {
         resultElement.innerHTML += `
-            <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-            <p>Classificação: ${details.vote_average}</p>
-            <p>Duração: ${details.runtime} minutos</p>
-            <p>Diretor: ${details.director || 'Não disponível'}</p>
+            <div class= "infos">
+                <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                <p>Classificação: ${details.vote_average}</p>
+                <p>Duração: ${details.runtime} minutos</p>
+                <p>Diretor: ${details.director || 'Não disponível'}</p>
+            </div>
             `;
         })
         .catch(error => console.error('Erro ao obter detalhes do filme:', error));
@@ -137,10 +139,12 @@ function getTVShowDetails(tvShowId, resultElement) {
         .then(response => response.json())
         .then(details => {
         resultElement.innerHTML += `
-            <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-            <p>Classificação: ${details.vote_average}</p>
-            <p>Duração: ${details.runtime} minutos</p>
-            <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
+            <div class= "infos">
+                <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                <p>Classificação: ${details.vote_average}</p>
+                <p>Duração: ${details.runtime || 'Não disponivel os '}minutos </p>
+                <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
+            </div>
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
