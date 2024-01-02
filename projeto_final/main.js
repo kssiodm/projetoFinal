@@ -9,6 +9,8 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
 
     const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchTerm}&language=${language}`;
 
+    scrollToTop();
+
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
@@ -148,4 +150,11 @@ function getTVShowDetails(tvShowId, resultElement) {
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Para uma rolagem suave
+    });
 }
