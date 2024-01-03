@@ -21,6 +21,10 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
 
 });
 
+document.getElementById('clearButton').addEventListener('click', function() {
+    document.getElementById('movieTitle').value = '';
+});
+
 function displayResults(results) {
     const resultsContainer = document.getElementById('results');
 
@@ -112,24 +116,52 @@ function formatarData(dataString) {
     return `${dia}/${mes}/${ano}`;
 }
 
+// function getMovieDetails(movieId, resultElement) {
+//     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
+
+//     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
+
+//     fetch(movieDetailsUrl)
+//     .then(response => response.json())
+//     .then(details => {
+//     resultElement.innerHTML += `
+//         <div class= "infos">
+//             <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+//             <p>Classificação: ${details.vote_average.toFixed(2)}</p>
+//             <p>Duração: ${details.runtime } minutos</p>
+//             <p>Diretor: ${details.director || 'Não disponível'}</p>
+//         </div>
+//         `;
+//     })
+//         .catch(error => console.error('Erro ao obter detalhes do filme:', error));
+// }
+
 function getMovieDetails(movieId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
+    const movieCreditsUrl = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${apiKey}`;
 
     fetch(movieDetailsUrl)
+    .then(response => response.json())
+    .then(details => {
+        fetch(movieCreditsUrl)
         .then(response => response.json())
-        .then(details => {
-        resultElement.innerHTML += `
-            <div class= "infos">
-                <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                <p>Classificação: ${details.vote_average}</p>
-                <p>Duração: ${details.runtime} minutos</p>
-                <p>Diretor: ${details.director || 'Não disponível'}</p>
-            </div>
-            `;
+        .then(credits => {
+            const directors = credits.crew.filter(member => member.job === 'Director');
+
+            resultElement.innerHTML += `
+                <div class= "infos">
+                    <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                    <p>Classificação: ${details.vote_average.toFixed(2)}</p>
+                    <p>Duração: ${details.runtime } minutos</p>
+                    <p>Diretor: ${directors.map(director => director.name).join(', ')}</p>
+                </div>
+                `;
         })
-        .catch(error => console.error('Erro ao obter detalhes do filme:', error));
+        .catch(error => console.error('Erro ao obter créditos do filme:', error));
+    })
+    .catch(error => console.error('Erro ao obter detalhes do filme:', error));
 }
 
 function getTVShowDetails(tvShowId, resultElement) {
@@ -143,9 +175,9 @@ function getTVShowDetails(tvShowId, resultElement) {
         resultElement.innerHTML += `
             <div class= "infos">
                 <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                <p>Classificação: ${details.vote_average}</p>
-                <p>Duração: ${details.runtime || 'Não disponivel os '}minutos </p>
-                <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
+                <p>Classificação: ${details.vote_average.toFixed(2)}</p>
+                <p>Duração de cada episódio: ${details.episode_run_time.join(' minutos, ')} minutos</p>
+                <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
             </div>
         `;
         })
