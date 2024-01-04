@@ -76,6 +76,18 @@ button:hover {
     color: #0056b3;
 }
 
+.media-card {
+    margin-bottom: 20px; 
+    margin-top: 5px;
+}
+
+.media-card img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
 #results {
     align-items: center;
     margin-top: 20px;
@@ -87,6 +99,7 @@ button:hover {
 
 
 .result img {
+    margin-top: 7px;
     max-width: 100%;
     height: auto;
     border-radius: 8px; 

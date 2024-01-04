@@ -116,26 +116,6 @@ function formatarData(dataString) {
     return `${dia}/${mes}/${ano}`;
 }
 
-// function getMovieDetails(movieId, resultElement) {
-//     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
-
-//     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
-
-//     fetch(movieDetailsUrl)
-//     .then(response => response.json())
-//     .then(details => {
-//     resultElement.innerHTML += `
-//         <div class= "infos">
-//             <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-//             <p>Classificação: ${details.vote_average.toFixed(2)}</p>
-//             <p>Duração: ${details.runtime } minutos</p>
-//             <p>Diretor: ${details.director || 'Não disponível'}</p>
-//         </div>
-//         `;
-//     })
-//         .catch(error => console.error('Erro ao obter detalhes do filme:', error));
-// }
-
 function getMovieDetails(movieId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
@@ -155,7 +135,7 @@ function getMovieDetails(movieId, resultElement) {
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     <p>Classificação: ${details.vote_average.toFixed(2)}</p>
                     <p>Duração: ${details.runtime } minutos</p>
-                    <p>Diretor: ${directors.map(director => director.name).join(', ')}</p>
+                    <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
                 </div>
                 `;
         })
@@ -176,7 +156,7 @@ function getTVShowDetails(tvShowId, resultElement) {
             <div class= "infos">
                 <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                 <p>Classificação: ${details.vote_average.toFixed(2)}</p>
-                <p>Duração de cada episódio: ${details.episode_run_time.join(' minutos, ')} minutos</p>
+                <p>Duração de cada episódio: ${details.episode_run_time.join(' minutos, ') || 'Não disponível'} </p>
                 <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
             </div>
         `;
