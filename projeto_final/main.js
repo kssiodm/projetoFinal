@@ -21,6 +21,19 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
 
 });
 
+function searchBlur() {
+    var btnHome = document.getElementById("btn-home");
+    btnHome.classList.remove("nav-link-active");
+}
+function homeClick() {
+    scrollToTop()
+
+    setTimeout(function() {
+        location.reload();
+    }, 1000); 
+    
+}
+
 document.getElementById('clearButton').addEventListener('click', function() {
     document.getElementById('movieTitle').value = '';
 });
@@ -164,9 +177,9 @@ function getTVShowDetails(tvShowId, resultElement) {
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
 }
 
-function scrollToTop() {
+function scrollToTop(){
     window.scrollTo({
         top: 0,
-        behavior: 'smooth' // Para uma rolagem suave
+        behavior: 'smooth' 
     });
 }

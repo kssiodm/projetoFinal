@@ -1,3 +1,8 @@
+window.onload = function() {
+    var btnHome = document.getElementById("btn-home");
+    btnHome.classList.add("nav-link-active");
+};
+
 $(document).ready(function () {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
@@ -8,19 +13,23 @@ $(document).ready(function () {
 
     const resultsContainer = $('#results');
 
+    const language = 'pt-BR';
+
     function getTopRatedMedia() {
         $.ajax({
             url: apiUrl + topRatedMoviesEndpoint,
             type: 'GET',
             data: {
-                api_key: apiKey
+                api_key: apiKey,
+                language: language
             },
             success: function (moviesData) {
                 $.ajax({
                     url: apiUrl + topRatedTVShowsEndpoint,
                     type: 'GET',
                     data: {
-                        api_key: apiKey
+                        api_key: apiKey,
+                        language: language
                     },
                     success: function (tvShowsData) {
                         displayMedia([...moviesData.results, ...tvShowsData.results]);
@@ -45,12 +54,12 @@ $(document).ready(function () {
             const row = $('<div class="row">');
 
             mediaGroup.forEach(function (item) {
-                const col = $('<div class="container col-md-4">');
+                const col = $('<div class="col-md-4">');
                 const mediaCard = $('<div class="media-card">');
                 const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
 
                 mediaImage.click(function () {
-                    alert('Implemente informações detalhadas aqui!');
+                    alert('Informações detalhadas!');
                 });
 
                 mediaCard.append(mediaImage);
@@ -70,6 +79,5 @@ $(document).ready(function () {
         return chunkedArr;
     }
 
-    
     getTopRatedMedia();
 });

@@ -19,7 +19,7 @@
                     <ul class="nav nav-pills d-block d-md-flex">
                         <li class="nav-item fw-bold">
                             <h4>
-                                <a href="#home_page" class="nav-link">
+                                <a href="#home" class="nav-link active" id="btn-home"  onclick="homeClick()">
                                     <i class="bi bi-house"></i>
                                     Home
                                 </a>
@@ -51,7 +51,7 @@
                         </li>
                         <li>
                             <form id="searchForm" class="container_flex">
-                                <input class="input-group" type="text" id="movieTitle" required>
+                                <input class="input-group" type="text" id="movieTitle"  onblur="searchBlur()" required>
                                 <button class="btn btn-secondary clear-btn" type="button" id="clearButton">
                                     <i class="bi bi-backspace"></i>
                                 </button>
