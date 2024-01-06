@@ -21,7 +21,8 @@ h1 {
 
 #cabecalho .nav .nav-link.active{
     background-color: #fff;
-    color: #000000;
+    color: #5100ff;
+    border-bottom: 2px solid #5100ff;
 }
 
 #cabecalho .nav .nav-link,
@@ -31,9 +32,6 @@ h1 {
     color: #000000;
 }
 
-.nav-link-active {
-    border-bottom: 2px solid #5100ff;
-}
 .nav-toggler{
     background-color: #ffeae6;
 }

@@ -3,6 +3,23 @@ window.onload = function() {
     btnHome.classList.add("nav-link-active");
 };
 
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    const searchQuery = document.getElementById('movieTitle').value;
+    if (searchQuery.trim() !== '') {window.onload = function() {
+    var btnHome = document.getElementById("btn-home");
+    btnHome.classList.add("nav-link-active");
+};
+        window.location.href = 'pesquisa.html?search=' + encodeURIComponent(searchQuery);
+    }
+});
+
+document.getElementById('movieTitle').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById('searchForm').submit();
+    }
+});
+
 $(document).ready(function () {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
