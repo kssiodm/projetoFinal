@@ -52,163 +52,81 @@ function displayResults(results) {
     }
 
     results.forEach(item => {
+        if (!item.poster_path) {
+            return;
+        }
+
         const resultElement = document.createElement('div');
         resultElement.classList.add('result');
 
-    let title, releaseDate, overview, imageUrl;
+        let title, releaseDate, overview, imageUrl;
 
-    if (item.media_type === 'movie') {
-        title = item.title;
-        releaseDate = formatarData(item.release_date);
-        overview = item.overview;
-        imageUrl = item.poster_path
-        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-        : 'placeholder-image-url.jpg'; 
-        getMovieDetails(item.id, resultElement);
-    } else if (item.media_type === 'tv') {
-        title = item.name;
-        releaseDate = formatarData(item.first_air_date);
-        overview = item.overview;
-        imageUrl = item.poster_path
-        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-        : 'placeholder-image-url.jpg';
-        getTVShowDetails(item.id, resultElement);
-    } else {
-        
-    return;
-    }
+        if (item.media_type === 'movie') {
+            title = item.title;
+            releaseDate = formatarData(item.release_date);
+            overview = item.overview;
+            imageUrl = item.poster_path
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : '';
+            getMovieDetails(item.id, resultElement);
+        } else if (item.media_type === 'tv') {
+            title = item.name;
+            releaseDate = formatarData(item.first_air_date);
+            overview = item.overview;
+            imageUrl = item.poster_path
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : '';
+            getTVShowDetails(item.id, resultElement);
+        }
 
-    resultElement.innerHTML = `
-        <div class="row">
-            <div class="col-md-4">
-                <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
-                <ul class="lista">
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-bookmark-plus"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-plus-circle"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-check-square"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-hand-thumbs-up"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-hand-thumbs-down"></i>
-                        </button>
-                    </li>
-                </ul>
-                <p>Data de Lançamento: ${releaseDate}</p>
+        if (!imageUrl) {
+            return;
+        }
+
+        resultElement.innerHTML = `
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
+                    <ul class="lista">
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-bookmark-plus"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-check-square"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-up"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-down"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <p>Data de Lançamento: ${releaseDate}</p>
+                </div>
+                <div class="col-md-8">
+                    <h2>${title}</h2>
+                    <p>${overview}</p>
+                    
+                </div>
             </div>
-            <div class="col-md-8">
-                <h2>${title}</h2>
-                <p>${overview}</p>
-                
-            </div>
-        </div>
-        `;
+            `;
 
         resultsContainer.appendChild(resultElement);
     });
 }
-
-// function displayResults(results) {
-//     const resultsContainer = document.getElementById('results');
-
-//     resultsContainer.innerHTML = '';
-
-//     if (results.length === 0) {
-//         resultsContainer.innerHTML = '<p>Nenhum resultado encontrado.</p>';
-//         return;
-//     }
-
-//     results.forEach(item => {
-//         if (!item.poster_path) {
-//             return;
-//         }
-
-//         const resultElement = document.createElement('div');
-//         resultElement.classList.add('result');
-
-//         let title, releaseDate, overview, imageUrl;
-
-//         if (item.media_type === 'movie') {
-//             title = item.title;
-//             releaseDate = formatarData(item.release_date);
-//             overview = item.overview;
-//             imageUrl = item.poster_path
-//                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-//                 : '';
-//             getMovieDetails(item.id, resultElement);
-//         } else if (item.media_type === 'tv') {
-//             title = item.name;
-//             releaseDate = formatarData(item.first_air_date);
-//             overview = item.overview;
-//             imageUrl = item.poster_path
-//                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-//                 : '';
-//             getTVShowDetails(item.id, resultElement);
-//         }
-
-//         if (!imageUrl) {
-//             return;
-//         }
-
-//         resultElement.innerHTML = `
-//             <div class="row">
-//                 <div class="col-md-4">
-//                     <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
-//                     <ul class="lista">
-//                         <li class="item_lista">
-//                             <button class="item_lista">
-//                                 <i class="bi bi-bookmark-plus"></i>
-//                             </button>
-//                         </li>
-//                         <li class="item_lista">
-//                             <button class="item_lista">
-//                                 <i class="bi bi-plus-circle"></i>
-//                             </button>
-//                         </li>
-//                         <li class="item_lista">
-//                             <button class="item_lista">
-//                                 <i class="bi bi-check-square"></i>
-//                             </button>
-//                         </li>
-//                         <li class="item_lista">
-//                             <button class="item_lista">
-//                                 <i class="bi bi-hand-thumbs-up"></i>
-//                             </button>
-//                         </li>
-//                         <li class="item_lista">
-//                             <button class="item_lista">
-//                                 <i class="bi bi-hand-thumbs-down"></i>
-//                             </button>
-//                         </li>
-//                     </ul>
-//                     <p>Data de Lançamento: ${releaseDate}</p>
-//                 </div>
-//                 <div class="col-md-8">
-//                     <h2>${title}</h2>
-//                     <p>${overview}</p>
-                    
-//                 </div>
-//             </div>
-//             `;
-
-//         resultsContainer.appendChild(resultElement);
-//     });
-// }
 
 function formatarData(dataString) {
     if (!dataString) {
