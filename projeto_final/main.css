@@ -20,9 +20,8 @@ h1 {
 }
 
 #cabecalho .nav .nav-link.active{
-    background-color: #fff;
-    color: #5100ff;
-    border-bottom: 2px solid #5100ff;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 #cabecalho .nav .nav-link,
