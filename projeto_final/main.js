@@ -59,11 +59,10 @@ function displayResults(results) {
         const resultElement = document.createElement('div');
         resultElement.classList.add('result');
 
-        let title, releaseDate, overview, imageUrl;
+        let title, overview, imageUrl;
 
         if (item.media_type === 'movie') {
             title = item.title;
-            releaseDate = formatarData(item.release_date);
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
@@ -71,7 +70,6 @@ function displayResults(results) {
             getMovieDetails(item.id, resultElement);
         } else if (item.media_type === 'tv') {
             title = item.name;
-            releaseDate = formatarData(item.first_air_date);
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
@@ -114,31 +112,16 @@ function displayResults(results) {
                             </button>
                         </li>
                     </ul>
-                    <p>Data de Lançamento: ${releaseDate}</p>
                 </div>
                 <div class="col-md-8">
                     <h2>${title}</h2>
                     <p>${overview}</p>
-                    
                 </div>
             </div>
             `;
 
         resultsContainer.appendChild(resultElement);
     });
-}
-
-function formatarData(dataString) {
-    if (!dataString) {
-        return 'Data indisponível';
-    }
-
-    const data = new Date(dataString);
-    const dia = data.getDate().toString().padStart(2, '0');
-    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); 
-    const ano = data.getFullYear();
-
-    return `${dia}/${mes}/${ano}`;
 }
 
 function getMovieDetails(movieId, resultElement) {
@@ -154,21 +137,23 @@ function getMovieDetails(movieId, resultElement) {
             .then(response => response.json())
             .then(credits => {
             const directors = credits.crew.filter(member => member.job === 'Director');
-
             resultElement.innerHTML += `
-                <div class= "infos">
+                <div class="infos col-md-4 d-flex flex-column">
+                    <p>Data de lançamento: ${formatarData(details.release_date)}</p>
+                </div>
+                <div class= "infos col-md-4 d-flex flex-column">
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     <p>Classificação: ${details.vote_average.toFixed(1)}</p>
                     <p>Duração: ${details.runtime } minutos</p>
                     <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
                 </div>
+                
                 `;
         })
         .catch(error => console.error('Erro ao obter créditos do filme:', error));
     })
     .catch(error => console.error('Erro ao obter detalhes do filme:', error));
 }
-
 
 function getTVShowDetails(tvShowId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
@@ -179,16 +164,33 @@ function getTVShowDetails(tvShowId, resultElement) {
         .then(response => response.json())
         .then(details => {
         resultElement.innerHTML += `
-            <div class= "infos">
+            <div class="infos col-md-4 d-flex flex-column">
+                <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
+            </div>
+            <div class= "infos col-md-4 d-flex flex-column">
                 <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                 <p>Classificação: ${details.vote_average.toFixed(1)}</p>
                 <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
                 <p>Temporadas: ${details.number_of_seasons}</p>
                 <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
             </div>
+            
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
+}
+
+function formatarData(dataString) {
+    if (!dataString) {
+        return 'Data indisponível';
+    }
+
+    const data = new Date(dataString);
+    const dia = data.getDate().toString().padStart(2, '0');
+    const mes = (data.getMonth() + 1).toString().padStart(2, '0'); 
+    const ano = data.getFullYear();
+
+    return `${dia}/${mes}/${ano}`;
 }
 
 function scrollToTop() {
