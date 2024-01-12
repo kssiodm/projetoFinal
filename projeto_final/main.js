@@ -144,6 +144,7 @@ function getMovieDetails(movieId, resultElement) {
                 <div class= "infos col-md-4 d-flex flex-column">
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     <p>Classificação: ${details.vote_average.toFixed(1)}</p>
+                    <p>popularidade: ${details.popularity}</p>
                     <p>Duração: ${details.runtime } minutos</p>
                     <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
                 </div>
@@ -170,6 +171,7 @@ function getTVShowDetails(tvShowId, resultElement) {
             <div class= "infos col-md-4 d-flex flex-column">
                 <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                 <p>Classificação: ${details.vote_average.toFixed(1)}</p>
+                <p>popularidade: ${details.popularity}</p>
                 <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
                 <p>Temporadas: ${details.number_of_seasons}</p>
                 <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
