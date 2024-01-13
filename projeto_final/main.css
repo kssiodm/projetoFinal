@@ -63,26 +63,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-#clearButton{
-    background-color: transparent;
-    border: none;
-    color: #000000; 
-    text-decoration: none;
-    cursor: pointer;
-    list-style: none;
-    position: absolute;
-    top: 27%;
-    right: 5px;
-    transform: translateY(200%);
-    transform: translateX(-1270%);
-    padding: 5px 10px;
-}
-
-#clearButton:hover{
-    background-color: transparent;
-    color: #0056b3;
-}
-
 .media-card {
     margin-bottom: 20px; 
 }

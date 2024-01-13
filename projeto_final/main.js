@@ -15,10 +15,6 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
     search(e);
 });
 
-document.getElementById('clearButton').addEventListener('click', function() {
-    document.getElementById('movieTitle').value = '';
-});
-
 function search(e) {
 
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
