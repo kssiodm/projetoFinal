@@ -81,33 +81,6 @@ function displayResults(results) {
             <div class="row">
                 <div class="col-md-4">
                     <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
-                    <ul class="lista">
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-bookmark-plus"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-check-square"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-hand-thumbs-up"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-hand-thumbs-down"></i>
-                            </button>
-                        </li>
-                    </ul>
                 </div>
                 <div class="col-md-8">
                     <h2>${title}</h2>
@@ -135,11 +108,39 @@ function getMovieDetails(movieId, resultElement) {
             const directors = credits.crew.filter(member => member.job === 'Director');
             resultElement.innerHTML += `
                 <div class="infos col-md-4 d-flex flex-column">
+                    <ul class="lista">
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-bookmark-plus"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-check-square"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-up"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-down"></i>
+                            </button>
+                        </li>
+                    </ul>
                     <p>Data de lançamento: ${formatarData(details.release_date)}</p>
                 </div>
                 <div class= "infos col-md-4 d-flex flex-column">
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     <p>Classificação: ${details.vote_average.toFixed(1)}</p>
+                    <p>Classificação indicativa: ${details.adult}</p>
                     <p>popularidade: ${details.popularity}</p>
                     <p>Duração: ${details.runtime } minutos</p>
                     <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
@@ -162,6 +163,33 @@ function getTVShowDetails(tvShowId, resultElement) {
         .then(details => {
         resultElement.innerHTML += `
             <div class="infos col-md-4 d-flex flex-column">
+                <ul class="lista">
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-bookmark-plus"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-plus-circle"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-check-square"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-hand-thumbs-down"></i>
+                        </button>
+                    </li>
+                </ul>
                 <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
             </div>
             <div class= "infos col-md-4 d-flex flex-column">
