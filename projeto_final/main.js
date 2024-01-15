@@ -168,7 +168,7 @@ function getTVShowDetails(tvShowId, resultElement) {
             <div class="infos col-md-4 d-flex flex-column">
                 <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
             </div>
-            <div class= "infos col-md-4 d-flex flex-column">
+            <div class= "infos col-md-4  d-flex flex-column">
                 <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                 <p>Classificação: ${details.vote_average.toFixed(1)}</p>
                 <p>popularidade: ${details.popularity}</p>
