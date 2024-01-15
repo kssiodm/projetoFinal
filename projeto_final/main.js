@@ -36,61 +36,6 @@ function search(e) {
 
 };
 
-// function displayResults(results) {
-//     const resultsContainer = document.getElementById('results');
-
-//     resultsContainer.innerHTML = '';
-
-//     if (results.length === 0) {
-//         resultsContainer.innerHTML = '<p>Nenhum resultado encontrado.</p>';
-//         return;
-//     }
-
-//     results.forEach(item => {
-//         if (!item.poster_path) {
-//             return;
-//         }
-
-//         const resultElement = document.createElement('div');
-//         resultElement.classList.add('result');
-
-//         let title, overview, imageUrl;
-
-//         if (item.media_type === 'movie') {
-//             title = item.title;
-//             overview = item.overview;
-//             imageUrl = item.poster_path
-//                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-//                 : '';
-//             getMovieDetails(item.id, resultElement);
-//         } else if (item.media_type === 'tv') {
-//             title = item.name;
-//             overview = item.overview;
-//             imageUrl = item.poster_path
-//                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-//                 : '';
-//             getTVShowDetails(item.id, resultElement);
-//         }
-
-//         if (!imageUrl) {
-//             return;
-//         }
-//         resultElement.innerHTML = `
-//             <div class="row">
-//                 <div class="col-md-4">
-//                     <img src="${imageUrl}" alt="${title} Poster" class="d-block w-100 rounded">
-//                 </div>
-//                 <div class="col-md-8">
-//                     <h2>${title}</h2>
-//                     <p>${overview}</p>
-//                 </div>
-//             </div>
-//             `;
-
-//         resultsContainer.appendChild(resultElement);
-//     });
-// }
-
 async function displayResults(results) {
     const resultsContainer = document.getElementById('results');
 
