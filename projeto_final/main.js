@@ -56,27 +56,27 @@ async function displayResults(results) {
 
         let title, overview, imageUrl;
 
-        if (item.media_type === 'movie') {
+        if (item.media_type == 'movie') {
             title = item.title;
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                 : '';
-            await getMovieDetails(item.id, resultElement);
-        } else if (item.media_type === 'tv') {
+                await getMovieDetails(item.id, resultElement);
+        }else if (item.media_type == 'tv') {
             title = item.name;
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                 : '';
-            await getTVShowDetails(item.id, resultElement);
+                await getTVShowDetails (item.id, resultElement);
         }
 
         if (!imageUrl) {
             continue;
         }
 
-        const streamingProviders = await getStreamingProviders(item.id, item.media_type);
+        const streamingProviders =  await getStreamingProviders(item.id, item.media_type);
 
         resultElement.innerHTML = `
             <div class="row">
@@ -88,7 +88,7 @@ async function displayResults(results) {
                     <p>${overview}</p>
                     <p>disponivel em:
                         ${streamingProviders.map(provider => `
-                        <img src="${provider.logo}" alt="${provider.name} Logo" class="streaming-logo">
+                            <img src="${provider.logo}" alt="${provider.name} Logo" class="streaming-logo">
                         `).join('')}
                     </p>
                 </div>
@@ -100,7 +100,7 @@ async function displayResults(results) {
 }
 
 
-async function getStreamingProviders(id, mediaType) {
+async   function getStreamingProviders(id, mediaType) {
     const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=e684ab1ca25ce9861ccd1c17032e82e6`);
     const data = await response.json();
 
