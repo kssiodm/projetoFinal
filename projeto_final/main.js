@@ -36,7 +36,7 @@ function search(e) {
 
 };
 
-async function displayResults(results) {
+function displayResults(results) {
     const resultsContainer = document.getElementById('results');
 
     resultsContainer.innerHTML = '';
@@ -46,9 +46,9 @@ async function displayResults(results) {
         return;
     }
 
-    for (const item of results) {
+    results.forEach(item => {
         if (!item.poster_path) {
-            continue;
+            return;
         }
 
         const resultElement = document.createElement('div');
@@ -56,27 +56,51 @@ async function displayResults(results) {
 
         let title, overview, imageUrl;
 
-        if (item.media_type == 'movie') {
+        if (item.media_type === 'movie') {
             title = item.title;
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                 : '';
-                await getMovieDetails(item.id, resultElement);
-        }else if (item.media_type == 'tv') {
+        } else if (item.media_type === 'tv') {
             title = item.name;
             overview = item.overview;
             imageUrl = item.poster_path
                 ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                 : '';
-                await getTVShowDetails (item.id, resultElement);
         }
 
         if (!imageUrl) {
-            continue;
+            return;
         }
 
-        const streamingProviders =  await getStreamingProviders(item.id, item.media_type);
+        const streamingLogosElement = document.createElement('div');
+
+        getStreamingProviders(item.id, item.media_type)
+            .then(streamingProviders => {
+                if (streamingProviders.length > 0) {
+                    streamingProviders.forEach(provider => {
+                        if (provider.logo) {
+                            const logoImage = document.createElement('img');
+                            logoImage.src = provider.logo;
+                            logoImage.alt = `${provider.name} Logo`;
+                            logoImage.classList.add('streaming-logo');
+                            streamingLogosElement.appendChild(logoImage);
+                        }
+                    });
+                }
+                
+                resultElement.appendChild(streamingLogosElement);
+
+                if (item.media_type === 'movie') {
+                    getMovieDetails(item.id, resultElement);
+                } else if (item.media_type === 'tv') {
+                    getTVShowDetails(item.id, resultElement);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter provedores de streaming:', error);
+            });
 
         resultElement.innerHTML = `
             <div class="row">
@@ -86,42 +110,41 @@ async function displayResults(results) {
                 <div class="col-md-8">
                     <h2>${title}</h2>
                     <p>${overview}</p>
-                    <p>disponivel em:
-                        ${streamingProviders.map(provider => `
-                            <img src="${provider.logo}" alt="${provider.name} Logo" class="streaming-logo">
-                        `).join('')}
-                    </p>
                 </div>
             </div>
-        `;
+            `;
 
         resultsContainer.appendChild(resultElement);
-    }
+    });
 }
 
+function getStreamingProviders(id, mediaType) {
+    return fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=e684ab1ca25ce9861ccd1c17032e82e6`)
+        .then(response => response.json())
+        .then(data => {
+            const streamingProviders = [];
 
-async   function getStreamingProviders(id, mediaType) {
-    const response = await fetch(`https://api.themoviedb.org/3/${mediaType}/${id}/watch/providers?api_key=e684ab1ca25ce9861ccd1c17032e82e6`);
-    const data = await response.json();
+            if (data.results && data.results.BR) {
+                const brProviders = data.results.BR;
+                const flatrateProviders = brProviders.flatrate || [];
 
-    const streamingProviders = [];
+                for (const provider of flatrateProviders) {
+                    streamingProviders.push({
+                        name: provider.provider_name,
+                        logo: provider.logo_path ? `https://image.tmdb.org/t/p/original${provider.logo_path}` : null,
+                    });
+                }
+            }
 
-    if (data.results && data.results.BR) {
-        const brProviders = data.results.BR;
-        const flatrateProviders = brProviders.flatrate || [];
-
-        for (const provider of flatrateProviders) {
-            streamingProviders.push({
-                name: provider.provider_name,
-                logo: provider.logo_path ? `https://image.tmdb.org/t/p/original${provider.logo_path}` : null,
-            });
-        }
-    }
-
-    return streamingProviders;
+            return streamingProviders;
+        })
+        .catch(error => {
+            console.error('Erro ao obter provedores de streaming:', error);
+            return [];
+        });
 }
 
-async   function getMovieDetails(movieId, resultElement) {
+function getMovieDetails(movieId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=pt-BR`;
@@ -134,6 +157,7 @@ async   function getMovieDetails(movieId, resultElement) {
             .then(response => response.json())
             .then(credits => {
             const directors = credits.crew.filter(member => member.job === 'Director');
+            const countries = details.production_countries.map(country => country.name).join(', ');
             resultElement.innerHTML += `
                 <div class="infos col-md-4 d-flex flex-column">
                     <ul class="lista">
@@ -168,9 +192,9 @@ async   function getMovieDetails(movieId, resultElement) {
                 <div class= "infos col-md-4 d-flex flex-column">
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     <p>Classificação: ${details.vote_average.toFixed(1)}</p>
-                    <p>Classificação indicativa: ${details.adult}</p>
                     <p>popularidade: ${details.popularity}</p>
-                    <p>Duração: ${details.runtime } minutos</p>
+                    <p>Duração: ${details.runtime} minutos</p>
+                    <p>País de Produção: ${countries || 'Não disponível'}</p>
                     <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
                 </div>
                 
@@ -181,7 +205,7 @@ async   function getMovieDetails(movieId, resultElement) {
     .catch(error => console.error('Erro ao obter detalhes do filme:', error));
 }
 
-async   function getTVShowDetails(tvShowId, resultElement) {
+function getTVShowDetails(tvShowId, resultElement) {
     const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
 
     const tvShowDetailsUrl = `https://api.themoviedb.org/3/tv/${tvShowId}?api_key=${apiKey}&language=pt-BR`;
@@ -189,46 +213,50 @@ async   function getTVShowDetails(tvShowId, resultElement) {
     fetch(tvShowDetailsUrl)
         .then(response => response.json())
         .then(details => {
+        const countries = details.production_countries.map(country => country.name).join(', ');
         resultElement.innerHTML += `
-            <div class="infos col-md-4 d-flex flex-column">
-                <ul class="lista">
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-bookmark-plus"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-plus-circle"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-check-square"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-hand-thumbs-up"></i>
-                        </button>
-                    </li>
-                    <li class="item_lista">
-                        <button class="item_lista">
-                            <i class="bi bi-hand-thumbs-down"></i>
-                        </button>
-                    </li>
-                </ul>
-                <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
+            <div class="row">
+                <div class="infos col-md-4 ">
+                    <ul class="lista">
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-bookmark-plus"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-check-square"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-up"></i>
+                            </button>
+                        </li>
+                        <li class="item_lista">
+                            <button class="item_lista">
+                                <i class="bi bi-hand-thumbs-down"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
+                    <p>Classificação: ${details.vote_average.toFixed(1)}</p>
+                    <p>popularidade: ${details.popularity}</p>
+                    <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
+                </div>
+                <div class= "infos col-md-6  d-flex flex-column">
+                    <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                    
+                    <p>País de Produção: ${countries || 'Não disponível'}</p>
+                    <p>Temporadas: ${details.number_of_seasons}</p>
+                    <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
+                </div>
             </div>
-            <div class= "infos col-md-4  d-flex flex-column">
-                <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                <p>Classificação: ${details.vote_average.toFixed(1)}</p>
-                <p>popularidade: ${details.popularity}</p>
-                <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
-                <p>Temporadas: ${details.number_of_seasons}</p>
-                <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}
-            </div>
-            
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
