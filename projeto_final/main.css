@@ -102,16 +102,15 @@ button:hover {
 }
 
 .streaming-logos {
-    
-    display: flex; /* Utiliza o layout flexível para os logos dos provedores de streaming */
-    flex-direction: column; /* Empilha os logos verticalmente */
-    align-items: center; /* Centraliza os logos horizontalmente dentro do contêiner */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .streaming-logos img {
     margin-left: 50px;
-    max-width: 50px; /* Define a largura máxima para as logos para evitar tamanhos exagerados */
-    margin-left: 10px; /* Adiciona margem à esquerda das logos para espaçamento */
+    max-width: 50px; 
+    margin-left: 10px; 
 }
 
 .result p {

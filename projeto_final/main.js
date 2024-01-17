@@ -159,7 +159,7 @@ function getMovieDetails(movieId, resultElement) {
             const directors = credits.crew.filter(member => member.job === 'Director');
             const countries = details.production_countries.map(country => country.name).join(', ');
             resultElement.innerHTML += `
-                <div class="infos col-md-4 d-flex flex-column">
+                <div class="col-md-4 d-flex flex-column">
                     <ul class="lista">
                         <li class="item_lista">
                             <button class="item_lista">
@@ -167,37 +167,35 @@ function getMovieDetails(movieId, resultElement) {
                             </button>
                         </li>
                         <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
+                            <button class="item_lista" onclick="transformarBotaoWatch(this)">
                                 <i class="bi bi-check-square"></i>
                             </button>
                         </li>
                         <li class="item_lista">
-                            <button class="item_lista">
+                            <button class="item_lista" onclick="transformarBotaoLike(this)">
                                 <i class="bi bi-hand-thumbs-up"></i>
                             </button>
                         </li>
                         <li class="item_lista">
-                            <button class="item_lista">
+                            <button class="item_lista onclick="transformarBotaoDislike(this)">
                                 <i class="bi bi-hand-thumbs-down"></i>
                             </button>
                         </li>
                     </ul>
-                    <p>Data de lançamento: ${formatarData(details.release_date)}</p>
                 </div>
-                <div class= "infos col-md-4 d-flex flex-column">
-                    <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                    <p>Classificação: ${details.vote_average.toFixed(1)}</p>
-                    <p>popularidade: ${details.popularity}</p>
-                    <p>Duração: ${details.runtime} minutos</p>
-                    <p>País de Produção: ${countries || 'Não disponível'}</p>
-                    <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
+                <div class="row">
+                    <div class= "infos col-md-4">
+                        <p>Data de lançamento: ${formatarData(details.release_date)}</p>
+                        <p>Classificação: ${details.vote_average.toFixed(1)}</p>
+                        <p>popularidade: ${details.popularity}</p>
+                        <p>Duração: ${details.runtime} minutos</p>
+                    </div>
+                    <div class= "infos col-md-8 d-flex flex-column">
+                        <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                        <p>País de Produção: ${countries || 'Não disponível'}</p>
+                        <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
+                    </div>
                 </div>
-                
                 `;
         })
         .catch(error => console.error('Erro ao obter créditos do filme:', error));
@@ -215,41 +213,38 @@ function getTVShowDetails(tvShowId, resultElement) {
         .then(details => {
         const countries = details.production_countries.map(country => country.name).join(', ');
         resultElement.innerHTML += `
+            <div class="col-md-4 d-flex flex-column">
+                <ul class="lista">
+                    <li class="item_lista">
+                        <button class="item_lista">
+                            <i class="bi bi-bookmark-plus"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista" onclick="transformarBotaoWatch(this)">
+                            <i class="bi bi-check-square"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista" onclick="transformarBotaoLike(this)">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                        </button>
+                    </li>
+                    <li class="item_lista">
+                        <button class="item_lista" onclick="transformarBotaoDislike(this)">
+                            <i class="bi bi-hand-thumbs-down"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
             <div class="row">
                 <div class="infos col-md-4 ">
-                    <ul class="lista">
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-bookmark-plus"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-plus-circle"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-check-square"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-hand-thumbs-up"></i>
-                            </button>
-                        </li>
-                        <li class="item_lista">
-                            <button class="item_lista">
-                                <i class="bi bi-hand-thumbs-down"></i>
-                            </button>
-                        </li>
-                    </ul>
                     <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
                     <p>Classificação: ${details.vote_average.toFixed(1)}</p>
                     <p>popularidade: ${details.popularity}</p>
                     <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
                 </div>
-                <div class= "infos col-md-6  d-flex flex-column">
+                <div class= "infos col-md-8  d-flex flex-column">
                     <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
                     
                     <p>País de Produção: ${countries || 'Não disponível'}</p>
@@ -260,6 +255,18 @@ function getTVShowDetails(tvShowId, resultElement) {
         `;
         })
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
+}
+
+function transformarBotaoWatch(botao) {
+    var estaMarcado = botao.classList.contains('checked');
+
+    if (estaMarcado) {
+        botao.classList.remove('checked');
+        botao.innerHTML = '<i class="bi bi-check-square"></i>';
+    } else {
+        botao.classList.add('checked');
+        botao.innerHTML = '<i class="bi bi-check-square-fill"></i>';
+    }
 }
 
 function formatarData(dataString) {
