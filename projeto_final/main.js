@@ -269,6 +269,36 @@ function transformarBotaoWatch(botao) {
     }
 }
 
+function transformarBotaoLike(botao) {
+    var botaoDislike = botao.parentNode.nextElementSibling.querySelector('.item_lista');
+
+    if (botao.classList.contains('checked')) {
+        botao.classList.remove('checked');
+        botao.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>';
+    } else {
+        botao.classList.add('checked');
+        botaoDislike.classList.remove('checked');
+
+        botao.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>';
+        botaoDislike.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
+    }
+}
+
+function transformarBotaoDislike(botao) {
+    var botaoLike = botao.parentNode.previousElementSibling.querySelector('.item_lista');
+
+    if (botao.classList.contains('checked')) {
+        botao.classList.remove('checked');
+        botao.innerHTML = '<i class="bi bi-hand-thumbs-down"></i>';
+    } else {
+        botao.classList.add('checked');
+        botaoLike.classList.remove('checked');
+
+        botao.innerHTML = '<i class="bi bi-hand-thumbs-down-fill"></i>';
+        botaoLike.innerHTML = '<i class="bi bi-hand-thumbs-up"></i>';
+    }
+}
+
 function formatarData(dataString) {
     if (!dataString) {
         return 'Data indisponível';
