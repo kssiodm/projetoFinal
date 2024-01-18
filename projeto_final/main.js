@@ -183,17 +183,17 @@ function getMovieDetails(movieId, resultElement) {
                         </li>
                     </ul>
                 </div>
-                <div class="row">
-                    <div class= "infos col-md-4">
-                        <p>Data de lançamento: ${formatarData(details.release_date)}</p>
-                        <p>Classificação: ${details.vote_average.toFixed(1)}</p>
-                        <p>popularidade: ${details.popularity}</p>
-                        <p>Duração: ${details.runtime} minutos</p>
+                <div class="row ">
+                    <div class= "infos col-md-4 border-right">
+                        <p  class="border-bottom">Data de lançamento: ${formatarData(details.release_date)}</p>
+                        <p  class="border-bottom">Classificação: ${details.vote_average.toFixed(1)}</p>
+                        <p  class="border-bottom">popularidade: ${details.popularity}</p>
+                        <p  class="border-bottom">Duração: ${details.runtime} minutos</p>
                     </div>
                     <div class= "infos col-md-8 d-flex flex-column">
-                        <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                        <p>País de Produção: ${countries || 'Não disponível'}</p>
-                        <p>Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
+                        <p  class="border-bottom">Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                        <p  class="border-bottom">País de Produção: ${countries || 'Não disponível'}</p>
+                        <p  class="border-bottom">Diretor: ${directors.map(director => director.name).join(', ') || 'Não disponível'}</p>
                     </div>
                 </div>
                 `;
@@ -238,18 +238,17 @@ function getTVShowDetails(tvShowId, resultElement) {
                 </ul>
             </div>
             <div class="row">
-                <div class="infos col-md-4 ">
-                    <p>Data de lançamento: ${formatarData(details.first_air_date)}</p>
-                    <p>Classificação: ${details.vote_average.toFixed(1)}</p>
-                    <p>popularidade: ${details.popularity}</p>
-                    <p>Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
+                <div class="infos col-md-4 border-right">
+                    <p  class="border-bottom">Data de lançamento: ${formatarData(details.first_air_date)}</p>
+                    <p  class="border-bottom">Classificação: ${details.vote_average.toFixed(1)}</p>
+                    <p  class="border-bottom">popularidade: ${details.popularity}</p>
+                    <p  class="border-bottom">Duração dos episódios: ${details.episode_run_time.length > 0 ? details.episode_run_time[0] + ' minutos' : 'Não disponível'}</p>
                 </div>
                 <div class= "infos col-md-8  d-flex flex-column">
-                    <p>Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
-                    
-                    <p>País de Produção: ${countries || 'Não disponível'}</p>
-                    <p>Temporadas: ${details.number_of_seasons}</p>
-                    <p>Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
+                    <p  class="border-bottom">Gêneros: ${details.genres.map(genre => genre.name).join(', ')}</p>
+                    <p  class="border-bottom">País de Produção: ${countries || 'Não disponível'}</p>
+                    <p  class="border-bottom">Temporadas: ${details.number_of_seasons}</p>
+                    <p  class="border-bottom">Diretor: ${details.created_by.length > 0 ? details.created_by.map(creator => creator.name).join(', ') : 'Não disponível'}</p>
                 </div>
             </div>
         `;

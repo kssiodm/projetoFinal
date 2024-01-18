@@ -2,11 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #dad5d5;
+    background-color: #1f1d1d;
 }
 
 .container {
-    background-color: #fff;
+    background-color: #15151b;
+    color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -20,20 +21,17 @@ h1 {
 }
 
 #cabecalho .nav .nav-link.active{
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 #cabecalho .nav .nav-link,
 .navbar-brand,
 .navbar-brand:hover,
 .nav-link.active:hover{
-    color: #000000;
+    color: #ffffff;
 }
 
-.nav-toggler{
-    background-color: #ffeae6;
-}
 label {
     display: block;
     margin-bottom: 10px;
@@ -44,6 +42,8 @@ input {
     padding: 5px;
     margin-bottom: 9px;
     margin-top: 5px;
+    background-color: #1f1d1d;
+    color: #fff;
 }
 
 button {
@@ -124,7 +124,7 @@ button:hover {
 .item_lista{
     background-color: transparent;
     border: none;
-    color: #000000; 
+    color: #ffffff; 
     text-decoration: none;
     cursor: pointer;
     margin-left: 5px;
