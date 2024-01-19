@@ -1,0 +1,19 @@
+.media-card {
+    margin-top: 10px;
+    margin-bottom: 20px; 
+}
+
+.media-card img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.media-card img { 
+    transition: 0.5s; 
+}
+.media-card img:hover { 
+    cursor: pointer;
+    transform: scale(1.1); 
+}
