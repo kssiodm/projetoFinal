@@ -1,8 +1,3 @@
-window.onload = function() {
-    var btnHome = document.getElementById("btn-home");
-    btnHome.classList.add("nav-link-active");
-};
-
 document.getElementById('searchForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
     const searchQuery = document.getElementById('movieTitle').value;
@@ -68,30 +63,32 @@ $(document).ready(function () {
 
     function displayMedia(media) {
         resultsContainer.empty();
-
+    
         const chunkedMedia = chunkArray(media, 3);
-
+    
         chunkedMedia.forEach(function (mediaGroup) {
             const row = $('<div class="row">');
-
+    
             mediaGroup.forEach(function (item) {
                 const col = $('<div class="col-md-4">');
                 const mediaCard = $('<div class="media-card">');
                 const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
-
+    
                 mediaImage.click(function () {
-                    alert('Informações detalhadas!');
+                    mediaImage.attr('data-id', item.id); // Adiciona o ID ao atributo data-id
+                    openMediaModal(item);
                 });
-
+    
                 mediaCard.append(mediaImage);
                 col.append(mediaCard);
                 row.append(col);
             });
-
+    
             resultsContainer.append(row);
         });
     }
 
+    
     function chunkArray(array, size) {
         const chunkedArr = [];
         for (let i = 0; i < array.length; i += size) {
@@ -102,3 +99,29 @@ $(document).ready(function () {
 
     getTopRatedMedia();
 });
+
+function openMediaModal(item) {
+    const modalTitle = $('#mediaModalLabel');
+    const modalBody = $('#mediaModalBody');
+
+    modalTitle.text(item.title || item.name);
+
+    const modalContent = `
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title || item.name} Poster" class="d-block w-100 rounded">
+            </div>
+            <div class="col-md-8">
+                <h2>${item.title || item.name}</h2>
+                <p>${item.overview}</p>
+                <p>Release Date: ${item.release_date || item.first_air_date}</p>
+                <!-- Adicione mais informações conforme necessário -->
+            </div>
+        </div>
+    `;
+
+    modalBody.html(modalContent);
+
+    $('#mediaModal').modal('show');
+}
+
