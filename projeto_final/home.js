@@ -114,7 +114,7 @@ function openMediaModal(item) {
             <div class="col-md-8">
                 <h2>${item.title || item.name}</h2>
                 <p>${item.overview}</p>
-                <p>Release Date: ${item.release_date || item.first_air_date}</p>
+                <p>Data de lançamento: ${formatarData(item.release_date) || formatarData(item.first_air_date)}</p>
                 <!-- Adicione mais informações conforme necessário -->
             </div>
         </div>
