@@ -69,7 +69,6 @@ $(document).ready(function () {
                 const col = $('<div class="col-md-4">');
                 const mediaCard = $('<div class="media-card">');
     
-                // Verificar se a URL do cartaz está disponível antes de criar a tag de imagem
                 if (item.poster_path) {
                     const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
     
@@ -87,7 +86,6 @@ $(document).ready(function () {
             resultsContainer.append(row);
         });
     }
-
     
     function chunkArray(array, size) {
         const chunkedArr = [];
