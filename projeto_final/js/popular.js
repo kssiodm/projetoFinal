@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     const language = 'pt-BR';
 
-    function getTopRatedMedia() {
+    function getPopularMedia() {
         $.ajax({
             url: apiUrl + popularMovieEndpoit,
             type: 'GET',
@@ -97,7 +97,7 @@ $(document).ready(function () {
         return chunkedArr;
     }
 
-    getTopRatedMedia();
+    getPopularMedia();
 });
 
 function openMediaModal(item) {
