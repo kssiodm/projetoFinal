@@ -46,7 +46,7 @@ function displayResults(results) {
         return;
     }
 
-    results.forEach(item => {
+    results.forEach(async item => {
         if (!item.poster_path) {
             return;
         }
@@ -75,32 +75,36 @@ function displayResults(results) {
         }
 
         const streamingLogosElement = document.createElement('div');
+        const streamingNamesList = document.createElement('ul');
+        streamingLogosElement.classList.add('streaming-logos');
 
-        getStreamingProviders(item.id, item.media_type)
-            .then(streamingProviders => {
-                if (streamingProviders.length > 0) {
-                    streamingProviders.forEach(provider => {
-                        if (provider.logo) {
-                            const logoImage = document.createElement('img');
-                            logoImage.src = provider.logo;
-                            logoImage.alt = `${provider.name} Logo`;
-                            logoImage.classList.add('streaming-logo');
-                            streamingLogosElement.appendChild(logoImage);
-                        }
-                    });
-                }
-                
-                resultElement.appendChild(streamingLogosElement);
+        try {
+            const streamingProviders = await getStreamingProviders(item.id, item.media_type);
 
-                if (item.media_type === 'movie') {
-                    getMovieDetails(item.id, resultElement);
-                } else if (item.media_type === 'tv') {
-                    getTVShowDetails(item.id, resultElement);
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao obter provedores de streaming:', error);
-            });
+            if (streamingProviders.length > 0) {
+                streamingProviders.forEach(provider => {
+                    if (provider.logo) {
+                        const logoImage = document.createElement('img');
+                        logoImage.src = provider.logo;
+                        logoImage.alt = `${provider.name} Logo`;
+                        logoImage.classList.add('streaming-logo');
+                        streamingLogosElement.appendChild(logoImage);
+
+                        const listItem = document.createElement('li');
+                        listItem.textContent = provider.name;
+                        streamingNamesList.appendChild(listItem);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Erro ao obter provedores de streaming:', error);
+        }
+
+        if (item.media_type === 'movie') {
+            await getMovieDetails(item.id, resultElement);
+        } else if (item.media_type === 'tv') {
+            await getTVShowDetails(item.id, resultElement);
+        }
 
         resultElement.innerHTML = `
             <div class="row">
@@ -110,9 +114,16 @@ function displayResults(results) {
                 <div class="col-md-8">
                     <h2>${title}</h2>
                     <p>${overview}</p>
+                    <div class="streaming-logos-horizontal">
+                        ${streamingLogosElement.outerHTML}
+                    </div>
+                    <div class="streaming-names-list">
+                        <p><strong>Disponível em:</strong></p>
+                        ${streamingNamesList.outerHTML}
+                    </div>
                 </div>
             </div>
-            `;
+        `;
 
         resultsContainer.appendChild(resultElement);
     });

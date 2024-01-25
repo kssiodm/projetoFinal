@@ -70,7 +70,17 @@ $(document).ready(function () {
                 if (item.poster_path) {
                     const col = $('<div class="col-md-4">');
                     const mediaCard = $('<div class="media-card">');
-                    const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
+                    // const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
+                    const mediaImage = $('<img>').attr({
+                        'src': 'https://image.tmdb.org/t/p/w500' + item.poster_path,
+                        'onerror': "$(this).hide(); $(this).siblings('.placeholder').show();"
+                    });
+                    
+                    const placeholder = $('<div class="placeholder">').css({
+                        'width': '100%', // Defina as dimensões desejadas para o espaço reservado
+                        'height': '50px', // Defina as dimensões desejadas para o espaço reservado
+                        'background': 'rgba(21, 21, 27, 0.0)', // Cor de fundo ou imagem de espaço reservado
+                    });
     
                     mediaImage.click(function () {
                         mediaImage.attr('data-id', item.id);
@@ -78,6 +88,7 @@ $(document).ready(function () {
                     });
     
                     mediaCard.append(mediaImage);
+                    mediaCard.append(placeholder);
                     col.append(mediaCard);
                     row.append(col);
                 }

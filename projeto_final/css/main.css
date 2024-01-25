@@ -9,6 +9,7 @@ body {
     background-color: #15151b;
     color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
 }
 
 h1 {
@@ -83,7 +84,7 @@ button:hover {
 
 .streaming-logos {
     display: flex; 
-    flex-direction: column; 
+    /* flex-direction: column;  */
     margin-bottom: 15px;
 }
 
