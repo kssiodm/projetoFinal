@@ -75,8 +75,9 @@ $(document).ready(function () {
                 const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
     
                 mediaImage.click(function () {
-                    mediaImage.attr('data-id', item.id); // Adiciona o ID ao atributo data-id
+                    mediaImage.attr('data-id', item.id); 
                     openMediaModal(item);
+                    // window.location.href = 'titulo.html?id=' + item.id;
                 });
     
                 mediaCard.append(mediaImage);
