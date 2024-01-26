@@ -94,6 +94,15 @@ button:hover {
     margin-bottom: 15px;
 }
 
+.streaming-logos-horizontal {
+    overflow-x: auto;
+}
+
+.streaming-logos-container {
+    white-space: nowrap;
+    display: inline-block;
+}
+
 .result p {
     margin-bottom: 8px;
 }
@@ -119,4 +128,10 @@ button:hover {
 
 .infos{
     display: block;
+}
+
+@media screen and (max-width:800px){
+    .container{
+        max-width: 100%;
+    }
 }
