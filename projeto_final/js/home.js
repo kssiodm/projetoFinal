@@ -73,12 +73,30 @@ $(document).ready(function () {
                 const col = $('<div class="col-md-4">');
                 const mediaCard = $('<div class="media-card">');
                 const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
+                let imageUrl;
     
                 mediaImage.click(function () {
-                    mediaImage.attr('data-id', item.id); 
-                    openMediaModal(item);
+                    // imageUrl = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
+                    // title = item.title; // Substitua com a propriedade correta do seu objeto 'item'
+                    // overview = item.overview;
+                    // window.location.href = 'titulo.html?id=' + item.id +
+                    //     '&imageUrl=' + encodeURIComponent(imageUrl) +
+                    //     '&title=' + encodeURIComponent(title) +
+                    //     '&overview=' + encodeURIComponent(overview);
                     // window.location.href = 'titulo.html?id=' + item.id;
+
+                    const movieInfo = {
+                        id: item.id,
+                        imageUrl: 'https://image.tmdb.org/t/p/w500' + item.poster_path,
+                        title: item.title,
+                        overview: item.overview
+                    }
+
+                    sessionStorage.setItem('movieInfo', JSON.stringify(movieInfo));
+
+                    window.location.href = 'titulo.html';
                 });
+                
     
                 mediaCard.append(mediaImage);
                 col.append(mediaCard);
@@ -100,6 +118,9 @@ $(document).ready(function () {
 
     getTopRatedMedia();
 });
+
+// mediaImage.attr('data-id', item.id); 
+// openMediaModal(item);
 
 function openMediaModal(item) {
     const modalTitle = $('#mediaModalLabel');
