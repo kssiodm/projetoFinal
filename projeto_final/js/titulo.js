@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <p>${movieInfo.overview}</p>
                 </div>
             </div>
-        `;
+            `;
     } else {
         console.error('Informações do filme não encontradas no sessionStorage.');
     }

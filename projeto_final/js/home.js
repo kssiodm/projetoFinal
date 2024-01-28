@@ -2,8 +2,6 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
     event.preventDefault(); 
     const searchQuery = document.getElementById('movieTitle').value;
     if (searchQuery.trim() !== '') {window.onload = function() {
-    var btnHome = document.getElementById("btn-home");
-    btnHome.classList.add("nav-link-active");
 };
         window.location.href = 'pesquisa.html?search=' + encodeURIComponent(searchQuery);
     }
@@ -73,28 +71,11 @@ $(document).ready(function () {
                 const col = $('<div class="col-md-4">');
                 const mediaCard = $('<div class="media-card">');
                 const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
-                let imageUrl;
     
                 mediaImage.click(function () {
-                    // imageUrl = 'https://image.tmdb.org/t/p/w500' + item.poster_path;
-                    // title = item.title; // Substitua com a propriedade correta do seu objeto 'item'
-                    // overview = item.overview;
-                    // window.location.href = 'titulo.html?id=' + item.id +
-                    //     '&imageUrl=' + encodeURIComponent(imageUrl) +
-                    //     '&title=' + encodeURIComponent(title) +
-                    //     '&overview=' + encodeURIComponent(overview);
-                    // window.location.href = 'titulo.html?id=' + item.id;
+                    const itemName = item.title || item.name;
 
-                    const movieInfo = {
-                        id: item.id,
-                        imageUrl: 'https://image.tmdb.org/t/p/w500' + item.poster_path,
-                        title: item.title,
-                        overview: item.overview
-                    }
-
-                    sessionStorage.setItem('movieInfo', JSON.stringify(movieInfo));
-
-                    window.location.href = 'titulo.html';
+                    window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);
                 });
                 
     
