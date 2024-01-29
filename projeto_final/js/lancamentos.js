@@ -70,25 +70,17 @@ $(document).ready(function () {
                 if (item.poster_path) {
                     const col = $('<div class="col-md-4">');
                     const mediaCard = $('<div class="media-card">');
-                    // const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
-                    const mediaImage = $('<img>').attr({
-                        'src': 'https://image.tmdb.org/t/p/w500' + item.poster_path,
-                        'onerror': "$(this).hide(); $(this).siblings('.placeholder').show();"
-                    });
-                    
-                    const placeholder = $('<div class="placeholder">').css({
-                        'width': '100%', // Defina as dimensões desejadas para o espaço reservado
-                        'height': '50px', // Defina as dimensões desejadas para o espaço reservado
-                        'background': 'rgba(21, 21, 27, 0.0)', // Cor de fundo ou imagem de espaço reservado
-                    });
+                    const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
     
                     mediaImage.click(function () {
-                        mediaImage.attr('data-id', item.id);
-                        openMediaModal(item);
+                        // mediaImage.attr('data-id', item.id);
+                        // openMediaModal(item);
+                        const itemName = item.title || item.name;
+
+                        window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);
                     });
     
                     mediaCard.append(mediaImage);
-                    mediaCard.append(placeholder);
                     col.append(mediaCard);
                     row.append(col);
                 }
@@ -109,26 +101,8 @@ $(document).ready(function () {
     getLatestMedia();
 });
 
-function openMediaModal(item) {
-    const modalTitle = $('#mediaModalLabel');
-    const modalBody = $('#mediaModalBody');
-
-    modalTitle.text(item.title || item.name);
-
-    const modalContent = `
-        <div class="row">
-            <div class="col-md-4">
-                <img src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="${item.title || item.name} Poster" class="d-block w-100 rounded">
-            </div>
-            <div class="col-md-8">
-                <h2>${item.title || item.name}</h2>
-                <p>${item.overview}</p>
-                <!-- Adicione mais informações conforme necessário -->
-            </div>
-        </div>
-    `;
-
-    modalBody.html(modalContent);
-
-    $('#mediaModal').modal('show');
+function redirecionarParaPagina() {
+    // Substitua 'outra_pagina.html' pelo nome do seu arquivo HTML de destino
+    window.location.href = 'login.html';
 }
+
