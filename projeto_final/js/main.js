@@ -173,12 +173,12 @@ function getMovieDetails(movieId, resultElement) {
                 <div class="col-md-4 d-flex flex-column">
                     <ul class="lista">
                         <li class="item_lista">
-                            <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.title}')")>
+                            <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}')")>
                                 <i class="bi bi-bookmark-plus"></i>
                             </button>
                         </li>
                         <li class="item_lista botoes">
-                            <button class="item_lista" onclick="transformarBotaoplay(this),adicionarOuRemoverAssistirMaisTarde('${details.title}')">
+                            <button class="item_lista" onclick="transformarBotaoplay(this),adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
                                 <i class="bi bi-play-btn"></i>
                             </button>
                         </li>
@@ -232,12 +232,12 @@ function getTVShowDetails(tvShowId, resultElement) {
             <div class="col-md-4 d-flex flex-column">
                 <ul class="lista">
                     <li class="item_lista">
-                        <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.name}') ")>
+                        <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}') ")>
                             <i class="bi bi-bookmark-plus"></i>
                         </button>
                     </li>
                     <li class="item_lista">
-                        <button class="item_lista botoes" onclick="transformarBotaoplay(this)adicionarOuRemoverAssistirMaisTarde('${details.name}')">
+                        <button class="item_lista botoes" onclick="transformarBotaoplay(this)adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
                             <i class="bi bi-play-btn"></i>
                         </button>
                     </li>
@@ -277,53 +277,78 @@ function getTVShowDetails(tvShowId, resultElement) {
         .catch(error => console.error('Erro ao obter detalhes da série de TV:', error));
 }
 
-function adicionarOuRemoverDaLista(titulo) {
+function adicionarOuRemoverDaLista(poster_path, botao) {
     let lista = JSON.parse(localStorage.getItem('lista')) || [];
 
-    // Verifique se o título já está na lista
-    const index = lista.indexOf(titulo);
+    const index = lista.findIndex(item => item && item.poster_path === poster_path);
     if (index === -1) {
-        // Adicione o título à lista se não estiver presente
-        lista.push(titulo);
+        lista.push({ poster_path, type: 'lista' });
 
-        // Exiba uma mensagem para o usuário
-        alert(`"${titulo}" foi adicionado à Lista.`);
+        alert(`Item foi adicionado à Lista.`);
     } else {
-        // Remova o título da lista se já estiver presente
         lista.splice(index, 1);
 
-        // Exiba uma mensagem para o usuário
-        alert(`"${titulo}" foi removido da Lista.`);
+        alert(`Item removido da lista.`);
     }
 
-    // Atualize o localStorage com a nova lista
     localStorage.setItem('lista', JSON.stringify(lista));
-    transformarBotaolist(botao);
+    transformarBotaolist(botao, poster_path);
 }
 
-function adicionarOuRemoverAssistirMaisTarde(titulo) {
+function adicionarOuRemoverAssistirMaisTarde(poster_path, botao) {
     let assistirMaisTarde = JSON.parse(localStorage.getItem('assistirMaisTarde')) || [];
 
-    // Verifique se o título já está na lista "Assistir Mais Tarde"
-    const index = assistirMaisTarde.indexOf(titulo);
+    const index = assistirMaisTarde.findIndex(item => item && item.poster_path === poster_path);
     if (index === -1) {
-        // Adicione o título à lista "Assistir Mais Tarde" se não estiver presente
-        assistirMaisTarde.push(titulo);
+        assistirMaisTarde.push({ poster_path, type: 'assistirMaisTarde' });
 
-        // Exiba uma mensagem para o usuário
-        alert(`"${titulo}" foi adicionado à lista "Assistir Mais Tarde".`);
+        alert(`Item foi adicionado à lista "Assistir Mais Tarde".`);
     } else {
-        // Remova o título da lista "Assistir Mais Tarde" se já estiver presente
         assistirMaisTarde.splice(index, 1);
 
-        // Exiba uma mensagem para o usuário
-        alert(`"${titulo}" foi removido da lista "Assistir Mais Tarde".`);
+        alert(`Item foi removido da lista "Assistir Mais Tarde".`);
     }
 
-    // Atualize o localStorage com a nova lista "Assistir Mais Tarde"
     localStorage.setItem('assistirMaisTarde', JSON.stringify(assistirMaisTarde));
-    transformarBotaoplay(botao)
+    transformarBotaoplay(botao, poster_path);
 }
+
+// function adicionarOuRemoverDaLista(poster_path, titulo, botao) {
+//     let lista = JSON.parse(localStorage.getItem('lista')) || [];
+
+//     const index = lista.findIndex(item => item && item.poster_path === poster_path);
+//     if (index === -1) {
+//         lista.push({ poster_path, titulo, type: 'lista' });
+
+//         alert(`"${titulo}" foi adicionado à Lista.`);
+//     } else {
+//         lista.splice(index, 1);
+
+//         alert(`"${titulo}" foi removido da lista.`);
+//     }
+
+//     localStorage.setItem('lista', JSON.stringify(lista));
+//     transformarBotaolist(botao, poster_path);
+// }
+
+// function adicionarOuRemoverAssistirMaisTarde(poster_path, titulo, botao) {
+//     let assistirMaisTarde = JSON.parse(localStorage.getItem('assistirMaisTarde')) || [];
+
+//     const index = assistirMaisTarde.findIndex(item => item && item.poster_path === poster_path);
+//     if (index === -1) {
+//         assistirMaisTarde.push({ poster_path, titulo, type: 'assistirMaisTarde' });
+
+//         alert(`"${titulo}" foi adicionado à lista "Assistir Mais Tarde".`);
+//     } else {
+//         assistirMaisTarde.splice(index, 1);
+
+//         alert(`"${titulo}" foi removido da lista "Assistir Mais Tarde".`);
+//     }
+
+//     localStorage.setItem('assistirMaisTarde', JSON.stringify(assistirMaisTarde));
+//     transformarBotaoplay(botao, poster_path);
+// }
+
 function transformarBotaolist(botao) {
     var estaMarcado = botao.classList.contains('checked');
 

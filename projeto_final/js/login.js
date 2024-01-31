@@ -13,6 +13,20 @@ function validarCamposEEntrar() {
     }
 }
 
+function validarCamposLoginEntrar() {
+    var username = document.getElementById('username_login').value;
+    var password = document.getElementById('password_login').value;
+
+    // Verifica se todos os campos estão preenchidos
+    if (username !== '' &&  validarSenha(password)) {
+        // Se todos os campos estiverem preenchidos, redirecione para a página desejada
+        redirecionarParaHome();
+    } else {
+        // Caso contrário, exiba uma mensagem de erro ou faça outra ação desejada
+        alert('Por favor, preencha todos os campos corretamente.');
+    }
+}
+
 function validarEmail(email) {
     var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

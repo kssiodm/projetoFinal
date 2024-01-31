@@ -70,19 +70,22 @@ $(document).ready(function () {
             const row = $('<div class="row">');
     
             mediaGroup.forEach(function (item) {
-                const col = $('<div class="col-md-4">');
-                const mediaCard = $('<div class="media-card">');
-                const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
+                if (item.poster_path) {
+                    const col = $('<div class="col-md-4">');
+                    const mediaCard = $('<div class="media-card">');
+                    const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
     
-                mediaImage.click(function () {
-                    const itemName = item.title || item.name;
+                    mediaImage.click(function () {
+                        
+                        const itemName = item.title || item.name;
 
-                    window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);
-                });
+                        window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);
+                    });
     
-                mediaCard.append(mediaImage);
-                col.append(mediaCard);
-                row.append(col);
+                    mediaCard.append(mediaImage);
+                    col.append(mediaCard);
+                    row.append(col);
+                }
             });
     
             resultsContainer.append(row);

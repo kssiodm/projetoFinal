@@ -66,15 +66,13 @@ $(document).ready(function () {
             const row = $('<div class="row">');
     
             mediaGroup.forEach(function (item) {
-                // Verifica se o item possui imagem e sinopse
                 if (item.poster_path) {
                     const col = $('<div class="col-md-4">');
                     const mediaCard = $('<div class="media-card">');
                     const mediaImage = $('<img>').attr('src', 'https://image.tmdb.org/t/p/w500' + item.poster_path);
     
                     mediaImage.click(function () {
-                        // mediaImage.attr('data-id', item.id);
-                        // openMediaModal(item);
+                        
                         const itemName = item.title || item.name;
 
                         window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);

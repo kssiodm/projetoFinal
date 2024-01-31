@@ -23,6 +23,14 @@ body {
 .login-container h2 {
     text-align: center;
 }
+p a{
+    text-decoration: none;
+    color: #4c00ff;
+}
+
+p a:hover{
+    color: #7d48f8;
+}
 
 .login-form {
     display: flex;
