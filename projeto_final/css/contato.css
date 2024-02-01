@@ -1,0 +1,30 @@
+body{
+    background-color: #101013;
+}
+
+.row{
+    margin-top: 300px;
+}
+
+button{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+
+.social-links{
+    display: inline-flex;
+}
+
+.social-links li{
+    list-style: none;
+    margin-left: 5px;
+}
+
+.social-links li a{
+    text-decoration: none;
+    color: azure;
+}
+.social-links li a:hover{
+    color: #8d8d94;
+}

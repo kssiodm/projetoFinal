@@ -173,17 +173,17 @@ function getMovieDetails(movieId, resultElement) {
                 <div class="col-md-4 d-flex flex-column">
                     <ul class="lista">
                         <li class="item_lista">
-                            <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}')")>
+                            <button class="item_lista" id="bList" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}')")>
                                 <i class="bi bi-bookmark-plus"></i>
                             </button>
                         </li>
-                        <li class="item_lista botoes">
-                            <button class="item_lista" onclick="transformarBotaoplay(this),adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
+                        <li class="item_lista bWatch">
+                            <button class="item_lista" id="bWatch" onclick="transformarBotaoplay(this),adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
                                 <i class="bi bi-play-btn"></i>
                             </button>
                         </li>
                         <li class="item_lista">
-                            <button class="item_lista" onclick="transformarBotaoWatch(this)">
+                            <button class="item_lista" id="butozinho" onclick="transformarBotaoWatch(this)">
                                 <i class="bi bi-check-square"></i>
                             </button>
                         </li>
@@ -193,7 +193,7 @@ function getMovieDetails(movieId, resultElement) {
                             </button>
                         </li>
                         <li class="item_lista">
-                            <button class="item_lista onclick="transformarBotaoDislike(this)">
+                            <button class="item_lista" onclick="transformarBotaoDislike(this)">
                                 <i class="bi bi-hand-thumbs-down"></i>
                             </button>
                         </li>
@@ -232,17 +232,17 @@ function getTVShowDetails(tvShowId, resultElement) {
             <div class="col-md-4 d-flex flex-column">
                 <ul class="lista">
                     <li class="item_lista">
-                        <button class="item_lista botoes" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}') ")>
+                        <button class="item_lista bList" id="bList" onclick="transformarBotaolist(this),adicionarOuRemoverDaLista('${details.poster_path}') ")>
                             <i class="bi bi-bookmark-plus"></i>
                         </button>
                     </li>
                     <li class="item_lista">
-                        <button class="item_lista botoes" onclick="transformarBotaoplay(this)adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
+                        <button class="item_lista" id="bWatch" onclick="transformarBotaoplay(this)adicionarOuRemoverAssistirMaisTarde('${details.poster_path}')">
                             <i class="bi bi-play-btn"></i>
                         </button>
                     </li>
                     <li class="item_lista">
-                        <button class="item_lista" onclick="transformarBotaoWatch(this)">
+                        <button class="item_lista" id="butozinho" onclick="transformarBotaoWatch(this)">
                             <i class="bi bi-check-square"></i>
                         </button>
                     </li>
@@ -292,7 +292,7 @@ function adicionarOuRemoverDaLista(poster_path, botao) {
     }
 
     localStorage.setItem('lista', JSON.stringify(lista));
-    transformarBotaolist(botao, poster_path);
+    transformarBotaolist(botao);
 }
 
 function adicionarOuRemoverAssistirMaisTarde(poster_path, botao) {
@@ -310,7 +310,7 @@ function adicionarOuRemoverAssistirMaisTarde(poster_path, botao) {
     }
 
     localStorage.setItem('assistirMaisTarde', JSON.stringify(assistirMaisTarde));
-    transformarBotaoplay(botao, poster_path);
+    transformarBotaoplay(botao);
 }
 
 // function adicionarOuRemoverDaLista(poster_path, titulo, botao) {
@@ -434,4 +434,9 @@ function scrollToTop() {
         top: 0,
         behavior: 'smooth' 
     });
+}
+
+function redirecionarParaPagina() {
+    // Substitua 'outra_pagina.html' pelo nome do seu arquivo HTML de destino
+    window.location.href = 'login.html';
 }
