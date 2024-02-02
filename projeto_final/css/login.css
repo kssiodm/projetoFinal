@@ -53,6 +53,14 @@ p a:hover{
     border-radius: 4px;
 }
 
+#mensagemLogin {
+    display: none;
+    color: white;
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .form-group button {
     background-color: #007bff;
     color: #fff;

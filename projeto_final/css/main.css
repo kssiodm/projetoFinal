@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #1f1d1d;
@@ -15,6 +15,18 @@ body {
 h1 {
     color: #333;
 }
+
+.titulo{
+    color: rgb(73, 192, 240);
+    font-weight: bold;
+}
+
+h2 span{
+    font-family: 'Rubik Moonrocks', sans-serif;
+    color: #9fa7ac;
+}
+
+
 
 .container_flex{
     display: flex;
@@ -65,6 +77,33 @@ button:hover {
     margin-top: 5px;
 }
 
+::-webkit-scrollbar {
+    width: 12px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #15151b; 
+    border-radius: 6px; 
+}
+
+::-webkit-scrollbar-track {
+    background-color: #7c7979; /* Cor da trilha (parte não arrastável) */
+}
+
+scrollbar {
+    width: 12px; 
+}
+
+scrollbar-thumb {
+    background-color: #a0a0a0; 
+    border-radius: 6px; 
+}
+
+scrollbar-track {
+    background-color: #1f1d1d; 
+}
+
+
 #results {
     align-items: center;
     margin-top: 20px;
@@ -106,6 +145,10 @@ button:hover {
 
 .result p {
     margin-bottom: 8px;
+}
+
+.hidden {
+    display: none;
 }
 
 .lista{

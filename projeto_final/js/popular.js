@@ -105,7 +105,6 @@ $(document).ready(function () {
 });
 
 function redirecionarParaPagina() {
-    // Substitua 'outra_pagina.html' pelo nome do seu arquivo HTML de destino
     window.location.href = 'login.html';
 }
 

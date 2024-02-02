@@ -10,6 +10,53 @@ window.onload = function () {
 
 };
 
+document.getElementById('movieTitle').addEventListener('input', function (e) {
+    const searchTerm = e.target.value;
+
+    if (searchTerm.trim() !== '') {
+        fetchSuggestions(searchTerm);
+    } else {
+        clearSuggestions();
+    }
+});
+
+function fetchSuggestions(searchTerm) {
+    const apiKey = 'e684ab1ca25ce9861ccd1c17032e82e6';
+    const language = 'pt-BR';
+    const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${searchTerm}&language=${language}&page=1&include_adult=false`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            displaySuggestions(data.results);
+        })
+        .catch(error => console.error('Erro ao obter sugestões da API:', error));
+}
+
+function displaySuggestions(results) {
+    const suggestionsList = document.getElementById('suggestions');
+    suggestionsList.innerHTML = '';
+
+    results.forEach(item => {
+        let title;
+
+        if (item.media_type === 'movie') {
+            title = item.title;
+        } else if (item.media_type === 'tv') {
+            title = item.name;
+        }
+
+        const option = document.createElement('option');
+        option.value = title;
+        suggestionsList.appendChild(option);
+    });
+}
+
+function clearSuggestions() {
+    const suggestionsList = document.getElementById('suggestions');
+    suggestionsList.innerHTML = '';
+}
+
 document.getElementById('searchForm').addEventListener('submit', function (e) {
     e.preventDefault();
     search(e);
@@ -313,42 +360,6 @@ function adicionarOuRemoverAssistirMaisTarde(poster_path, botao) {
     transformarBotaoplay(botao);
 }
 
-// function adicionarOuRemoverDaLista(poster_path, titulo, botao) {
-//     let lista = JSON.parse(localStorage.getItem('lista')) || [];
-
-//     const index = lista.findIndex(item => item && item.poster_path === poster_path);
-//     if (index === -1) {
-//         lista.push({ poster_path, titulo, type: 'lista' });
-
-//         alert(`"${titulo}" foi adicionado à Lista.`);
-//     } else {
-//         lista.splice(index, 1);
-
-//         alert(`"${titulo}" foi removido da lista.`);
-//     }
-
-//     localStorage.setItem('lista', JSON.stringify(lista));
-//     transformarBotaolist(botao, poster_path);
-// }
-
-// function adicionarOuRemoverAssistirMaisTarde(poster_path, titulo, botao) {
-//     let assistirMaisTarde = JSON.parse(localStorage.getItem('assistirMaisTarde')) || [];
-
-//     const index = assistirMaisTarde.findIndex(item => item && item.poster_path === poster_path);
-//     if (index === -1) {
-//         assistirMaisTarde.push({ poster_path, titulo, type: 'assistirMaisTarde' });
-
-//         alert(`"${titulo}" foi adicionado à lista "Assistir Mais Tarde".`);
-//     } else {
-//         assistirMaisTarde.splice(index, 1);
-
-//         alert(`"${titulo}" foi removido da lista "Assistir Mais Tarde".`);
-//     }
-
-//     localStorage.setItem('assistirMaisTarde', JSON.stringify(assistirMaisTarde));
-//     transformarBotaoplay(botao, poster_path);
-// }
-
 function transformarBotaolist(botao) {
     var estaMarcado = botao.classList.contains('checked');
 
@@ -437,6 +448,5 @@ function scrollToTop() {
 }
 
 function redirecionarParaPagina() {
-    // Substitua 'outra_pagina.html' pelo nome do seu arquivo HTML de destino
     window.location.href = 'login.html';
 }
