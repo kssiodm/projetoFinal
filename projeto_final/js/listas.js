@@ -13,86 +13,77 @@ document.getElementById('movieTitle').addEventListener('keydown', function(event
     }
 });
 
-function obterLista() {
-    const lista = JSON.parse(localStorage.getItem('lista')) || [];
-    return lista;
+function createListElement(name, description) {
+    var listContainer = document.getElementById('lists-container');
+
+    var newList = document.createElement('div');
+    newList.className = 'list-item';
+    newList.innerHTML = '<h3 class="list-name" onclick="openDetailedModal(\'' + name + '\', \'' + description + '\')">' + name + '</h3>';
+
+    listContainer.appendChild(newList);
 }
 
-function obterAssistirMaisTarde() {
-    const assistirMaisTarde = JSON.parse(localStorage.getItem('assistirMaisTarde')) || [];
-    return assistirMaisTarde;
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const lista = obterLista();
-    renderizarLista(lista, 'listaContainer');
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('listForm').reset();
+}     
 
-    const assistirMaisTarde = obterAssistirMaisTarde();
-    renderizarLista(assistirMaisTarde, 'assistirMaisTardeContainer');
+function updateSaveButtonState() {
+    var listNameInput = document.getElementById('listName');
+    var saveListButton = document.getElementById('saveListButton');
+
+    if (listNameInput && saveListButton) {
+        saveListButton.disabled = listNameInput.value.trim().length === 0;
+    }
+}
+
+function saveList() {
+    var listNameInput = document.getElementById('listName');
+    var listName = listNameInput.value.trim();
+
+    if (listName.length > 0) {
+        var listDescription = document.getElementById('listDescription').value;
+
+        // Criar elemento de lista na página
+        createListElement(listName, listDescription);
+
+        // Limpar o formulário e fechar o modal
+        document.getElementById('listForm').reset();
+        $('#myModal').modal('hide');
+    } else {
+        // Adicione uma lógica para lidar com o caso em que o nome da lista é vazio
+        
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lista predefinida: Assistir Mais Tarde
+    createListElement("Assistir Mais Tarde", "Listinha para os próximos filmes e séries a serem assistidos.");
+
+    // Adicionar evento de input para verificar o comprimento do nome da lista
+    var listNameInput = document.getElementById('listName');
+
+    if (listNameInput) {
+        listNameInput.addEventListener('input', updateSaveButtonState);
+    }
+
+    // Chamar a função inicialmente para definir o estado do botão
+    updateSaveButtonState();
 });
 
-renderizarLista(['Item 1', 'Item 2'], 'listaContainer');
-renderizarLista(['Assistir Mais Tarde 1', 'Assistir Mais Tarde 2'], 'assistirMaisTardeContainer');
-
-// function renderizarLista(lista, containerId) {
-//     const container = document.getElementById(containerId);
-
-//     if (!container) {
-//         console.error(`Elemento com o ID '${containerId}' não encontrado.`);
-//         return;
-//     }
-
-//     container.innerHTML = ''; 
-
-//     if (lista.length === 0) {
-//         container.innerHTML = '<p>Nenhum item na lista.</p>';
-//         return;
-//     }
-
-//     container.innerHTML = lista.map(item => `<li>${item}</li>`).join('');
-// }
-
-function renderizarLista(lista, containerId) {
-    const container = document.getElementById(containerId);
-
-    if (!container) {
-        console.error(`Elemento com o ID '${containerId}' não encontrado.`);
-        return;
+function openDetailedModal(name, description) {
+    var detailedModalBody = document.getElementById('detailedModalBody');
+    detailedModalBody.innerHTML = '<p><strong>Nome:</strong> ' + name + '</p>';
+    
+    if (description) {
+        detailedModalBody.innerHTML += '<p><strong>Descrição:</strong> ' + description + '</p>';
     }
+    
+    // Adicione aqui o conteúdo da lista (filmes, séries, etc.)
 
-    container.innerHTML = ''; 
-
-    if (lista.length === 0) {
-        container.innerHTML = '<p>Nenhum item na lista.</p>';
-        return;
-    }
-
-    lista.forEach(item => {
-        if (item && item.poster_path) {
-            const listItem = document.createElement('li'); 
-            listItem.className = 'list-inline-item'; 
-
-            const mediaCard = document.createElement('div');
-            mediaCard.className = 'media-card';
-
-            const posterImg = document.createElement('img');
-            posterImg.src = `https://image.tmdb.org/t/p/w500${item.poster_path}`; 
-            posterImg.alt = item.title || item.name || 'Poster'; 
-
-            posterImg.addEventListener('click', function () {
-                const itemName = item.title || item.name;
-                window.location.href = 'pesquisa.html?search=' + encodeURIComponent(itemName);
-            });
-
-            mediaCard.appendChild(posterImg);
-            listItem.appendChild(mediaCard);
-
-            container.appendChild(listItem);
-        }
-    });
+    $('#detailedModal').modal('show');
 }
-
-
-
-
-

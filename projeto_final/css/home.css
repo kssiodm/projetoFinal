@@ -18,12 +18,54 @@
     transform: scale(1.1); 
 }
 
-.modal-header{
+.modal-header, .modal-body{
     background-color: #15151b;
-    color: white;
+    color: #fff;
 }
 
-.modal-body{
-    background-color: #15151b;
+#close_button{
+    background-color: red;
     color: white;
+    /* border: none; */
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* #close_button:hover{
+    color: rgb(194, 191, 191);
+} */
+
+#listName, #listDescription{
+    background-color: #1f1d1d;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+#listDescription{
+    resize: none;
+}
+
+/* #saveListButton:disabled {
+    background-color: #1f415e; 
+    cursor: not-allowed;
+} */
+
+.list-item{
+    margin-top: 5px;
+    background-color: #151515;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+.list-item:hover{
+    cursor: pointer;
+    background-color: #424141;
+    color: #c4c3c3;
+}
+
+.list-name{
+    margin-left: 10px;
 }
