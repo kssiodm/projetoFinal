@@ -289,7 +289,7 @@ function getTVShowDetails(tvShowId, resultElement) {
                         </button>
                     </li>
                     <li class="item_lista">
-                        <button class="item_lista" id="butozinho" onclick="transformarBotaoWatch(this)">
+                        <button class="item_lista"onclick="transformarBotaoWatch(this)">
                             <i class="bi bi-check-square"></i>
                         </button>
                     </li>
